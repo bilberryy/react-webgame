@@ -1,0 +1,111 @@
+<html>
+  <head> </head>
+  <body>
+    <div id="root"></div>
+    <!-- 개발용 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- 브라우저는 JSX를 몰라요 그래서 babel 추가 -->
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      'use strict'
+
+      class GuGuDan extends React.Component {
+        // constructor(props) {
+        //   super(props)
+        //   this.state = {
+        //     first: Math.ceil(Math.random() * 9),
+        //     second: Math.ceil(Math.random() * 9),
+        //     value: '',
+        //     result: '',
+        //   }
+        // }
+        // constructor 안 써도 가능, 실무에서 많이 사용, this빼기
+        state = {
+          first: Math.ceil(Math.random() * 9),
+          second: Math.ceil(Math.random() * 9),
+          value: '',
+          result: '',
+        }
+
+        // constructor를 사용할 땐 메서드는 constructor밖에 작성
+        // 메서드는 꼭 화살표 함수 사용 : function을 사용하면 this가 달라짐
+        onSubmit = (e) => {
+          e.preventDefault()
+          if (
+            parseInt(this.state.value) ===
+            this.state.first * this.state.second
+          ) {
+            this.setState((prevState) => {
+              return {
+                result: '정답: ' + prevState.value,
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+              }
+            })
+            this.input.focus()
+          } else {
+            this.setState({
+              result: '땡',
+              value: '',
+            })
+            this.input.focus()
+          }
+        }
+
+        onChange = (e) => {
+          this.setState({ value: e.target.value })
+        }
+
+        // ref를 위한 변수 선언
+        input
+
+        onRefInput = (c) => {
+          this.input = c
+        }
+
+        render() {
+          console.log('rendering')
+          // 시작 할 때 한번
+          // state 변할 때 한번
+          return (
+            <>
+              <div>
+                {this.state.first} 곱하기 {this.state.second}(은)는?
+              </div>
+              <form onSubmit={this.onSubmit}>
+                <input
+                  type='number'
+                  ref={this.onRefInput}
+                  value={this.state.value}
+                  onChange={this.onChange}
+                />
+                <button>입력!</button>
+              </form>
+              <div>{this.state.result}</div>
+            </>
+          )
+        }
+      }
+    </script>
+    <script type="text/babel">
+      ReactDOM.createRoot(document.querySelector('#root')).render(
+        <div>
+          <GuGuDan />
+          <GuGuDan />
+          <GuGuDan />
+        </div>
+      )
+    </script>
+  </body>
+</html>
