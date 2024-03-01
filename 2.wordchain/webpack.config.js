@@ -31,4 +31,14 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
   },
+  // devServer: {
+  //   static: {
+  //     directory: path.join(__dirname, 'dist'),
+  //   },
+  //   host: 'localhost',
+  //   port: 3000,
+  //   open: true,
+  //   historyApiFallback: true, // 404 페이지 대신 index.html로 이동합니다.
+  //   hot: true, // 모듈 전체를 다시 로드하지 않고 변경된 사항만 갱신합니다.
+  // },
 }
