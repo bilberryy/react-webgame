@@ -25,3 +25,6 @@
 # plugins: new HtmlWebpackPlugin({ template: './index.html' })
 
 # 이렇게 설정하면 ./index.html파일을 참고해서 새로운html파일을 생성
+
+
+다른 컴퓨터로 push 연습
